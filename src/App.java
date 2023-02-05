@@ -89,9 +89,16 @@ public class App extends Application{
             stage.setScene(sc);
             stage.show();
         });
-        StackPane root = new StackPane();
-        root.getChildren().add(startButton);
-        Scene sc = new Scene(root,600,600);
+        leaveButton.setOnAction(e -> {
+            stage.close();
+        });
+        VBox vMenu = new VBox();
+        
+        vMenu.getChildren().addAll(startButton,leaveButton);
+        vMenu.setSpacing(30);
+        vMenu.setAlignment(Pos.CENTER);
+    
+        Scene sc = new Scene(vMenu,600,600);
         stage.setTitle("Menu");
         stage.setScene(sc);
         stage.show();  
