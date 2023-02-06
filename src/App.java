@@ -49,7 +49,9 @@ public class App extends Application{
             stage.close();
         });*/
         startButton.setOnAction(event ->{
-
+            Label titre = new Label("Création des joueurs");
+            titre.setPadding(new Insets(0,130,160,0));
+            titre.setId("text-style-titre");
             HBox joueurWhite = new HBox(); 
             Label labelWhite = new Label();
             labelWhite.setId("text-style-joueur");
@@ -86,7 +88,7 @@ public class App extends Application{
                     Label blackLabel = new Label("Joueur Noir : "+jBlack);
                     Label whiteLabel = new Label("Joueur Blanc : "+jWhite);
                     
-                    VBox vb = new VBox(blackLabel,whiteLabel,submitButton);
+                    VBox vb = new VBox(blackLabel,whiteLabel);
                     vb.setAlignment(Pos.CENTER);
                     vb.setPadding(new Insets(15,15,15,150));
                     Scene sc = new Scene(vb,600,600);
@@ -95,7 +97,7 @@ public class App extends Application{
                     stage.show();
                 }
             });
-            VBox vChoix = new VBox(joueurWhite,joueurBlack,submitButton);
+            VBox vChoix = new VBox(titre,joueurWhite,joueurBlack,submitButton);
             vChoix.setPadding(new Insets(15,15,15,150));
             vChoix.setBackground(new Background(new BackgroundImage(new Image("background/backgroundJoueur.jpg")
                                 , NO_REPEAT, NO_REPEAT, CENTER, new BackgroundSize(1.5, 1.5, true, true, false, false))));

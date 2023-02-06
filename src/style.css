@@ -3,6 +3,12 @@
     -fx-background-size: 900 600;
     -fx-background-position: center center;
 }
+#text-style-titre{
+    -fx-text-fill: White;
+    -fx-font-weight:bold;
+    -fx-font-family: "Arial";
+    -fx-font-size: 30px;
+}
 #text-style-joueur{
     -fx-text-fill: White;
     -fx-font-weight:bold;
