@@ -21,9 +21,6 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,17 +34,6 @@ public class App extends Application{
         startButton.setId("button-style");
         Button leaveButton = new Button("Quit");
         leaveButton.setId("button-style");
-        /*btn.setOnAction(e -> {
-            StackPane root2 = new StackPane();
-            Label label = new Label("Second form");
-            root2.getChildren().add(label);
-            Scene secondScene = new Scene(root2,600,600);
-            Stage secondStage = new Stage();
-            secondStage.setScene(secondScene);
-            secondStage.setTitle("second form");
-            secondStage.show();
-            stage.close();
-        });*/
         startButton.setOnAction(event ->{
             Label titre = new Label("Création des joueurs");
             titre.setPadding(new Insets(0,130,160,0));
