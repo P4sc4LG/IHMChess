@@ -121,6 +121,12 @@ public class App extends Application{
                                   	    			pion pp = (pion)selectedPiece;
                                   	    			pp.firstMove=false;
                                   	    			}
+                              	    			if(selectedPiece.couleur.equals("black")) {
+                                  	    			trait="white";
+                                  	    		}
+                                  	    		else {
+                                  	    			trait="black";
+                                  	    		}
                               	    			selectedPiece=null;
                               	    			resetColor();
                               	    		}
@@ -145,6 +151,12 @@ public class App extends Application{
                                       	    			}
                                  	    			selectedPiece.x=GridPane.getColumnIndex(r);
                                   	    			selectedPiece.y=GridPane.getRowIndex(r);
+                                  	    			if(selectedPiece.couleur.equals("black")) {
+                                      	    			trait="white";
+                                      	    		}
+                                      	    		else {
+                                      	    			trait="black";
+                                      	    		}
                                   	    			selectedPiece=null;
                                   	    			resetColor();
                                  	    		}
@@ -283,10 +295,12 @@ public class App extends Application{
       	        ImageView v =(ImageView)t.getSource();
           	    Piece p =(Piece)getPieceByImageView(v);
           	    
-      	    if(selectedPiece==null) {
+      	    if(selectedPiece==null ) {
+      	    	if(p.couleur.equals(trait)) {
       	    	resetColor();
       	    	selectedPiece=p;
       	    	p.afficheCase(lesPieces,root);
+      	    	}
       	    	
       	    }else {
       	    	if(selectedPiece.couleur.equals(p.couleur)) {
@@ -305,6 +319,12 @@ public class App extends Application{
       	    		root.getChildren().remove(p.getImageView());
       	    		root.getChildren().remove(selectedPiece.getV());
       	    		root.add(selectedPiece.getV(), selectedPiece.getX(), selectedPiece.getY());
+      	    		if(selectedPiece.couleur.equals("black")) {
+      	    			trait="white";
+      	    		}
+      	    		else {
+      	    			trait="black";
+      	    		}
       	    		selectedPiece=null;
       	    		resetColor();}
       	    }
