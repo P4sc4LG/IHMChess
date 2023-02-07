@@ -46,6 +46,13 @@ public class App extends Application{
     
   
     
+    int initialX,initialY,destinationX,destinationY;
+    Piece selectedPiece;
+    GridPane root = new GridPane();
+    static List<Piece> lesPieces = new ArrayList();
+    
+  
+    
     @Override
     public void start(Stage stage){
     	
@@ -118,9 +125,6 @@ public class App extends Application{
                               	    public void handle(MouseEvent t) {
                               	    	Rectangle r = (Rectangle)t.getTarget();
                               	    		if(r.getFill().equals(Color.BLUE)) {
-                              	    			if(trait.equals("black")) {
-                                  	    			trait="white";
-                                  	    		}else {trait="black";}
                               	    			root.getChildren().remove(selectedPiece.getV());
                               	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
                               	    			
@@ -146,9 +150,6 @@ public class App extends Application{
                                  	    public void handle(MouseEvent t) {
                                  	    	Rectangle r = (Rectangle)t.getTarget();
                                  	    		if(r.getFill().equals(Color.BLUE)) {
-                                 	    			if(trait.equals("black")) {
-                                      	    			trait="white";
-                                      	    		}else {trait="black";}
                                  	    			root.getChildren().remove(selectedPiece.getV());
                                  	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
                                  	    			if(selectedPiece instanceof pion) { 
@@ -295,12 +296,10 @@ public class App extends Application{
       	        ImageView v =(ImageView)t.getSource();
           	    Piece p =(Piece)getPieceByImageView(v);
           	    
-      	    if(selectedPiece==null ) {
-      	    	if ( p.couleur.equals(trait)) {
+      	    if(selectedPiece==null) {
       	    	resetColor();
       	    	selectedPiece=p;
       	    	p.afficheCase(lesPieces,root);
-      	    	}
       	    	
       	    }else {
       	    	if(selectedPiece.couleur.equals(p.couleur)) {
@@ -320,9 +319,6 @@ public class App extends Application{
       	    		root.getChildren().remove(selectedPiece.getV());
       	    		root.add(selectedPiece.getV(), selectedPiece.getX(), selectedPiece.getY());
       	    		selectedPiece=null;
-      	    		if(trait.equals("black")) {
-      	    			trait="white";
-      	    		}else {trait="black";}
       	    		resetColor();}
       	    }
       	    
