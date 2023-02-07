@@ -46,11 +46,6 @@ public class App extends Application{
     
   
     
-    int initialX,initialY,destinationX,destinationY;
-    Piece selectedPiece;
-    GridPane root = new GridPane();
-    static List<Piece> lesPieces = new ArrayList();
-    
   
     
     @Override
