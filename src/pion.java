@@ -66,7 +66,7 @@ public class pion extends Piece {
 		if((ImageView)getNodeByRowColumnIndex(super.y+1, super.x, root)==null) {
 			((Rectangle) getRectByRowColumnIndex(super.y+1, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
 		}
-		if((ImageView)getNodeByRowColumnIndex(super.y+2, super.x, root)==null && (ImageView)getNodeByRowColumnIndex(super.y+1, super.x, root)==null&&firstMove) {
+		if((ImageView)getNodeByRowColumnIndex(super.y+2, super.x, root)==null && firstMove) {
 			((Rectangle) getRectByRowColumnIndex(super.y+2, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
 		}
 		}
@@ -80,7 +80,7 @@ public class pion extends Piece {
 			if((ImageView)getNodeByRowColumnIndex(super.y-1, super.x, root)==null) {
 				((Rectangle) getRectByRowColumnIndex(super.y-1, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
 			}
-			if((ImageView)getNodeByRowColumnIndex(super.y-2, super.x, root)==null && firstMove &&(ImageView)getNodeByRowColumnIndex(super.y-1, super.x, root)==null ) {
+			if((ImageView)getNodeByRowColumnIndex(super.y-2, super.x, root)==null && firstMove) {
 				((Rectangle) getRectByRowColumnIndex(super.y-2, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
 			}
 			}
