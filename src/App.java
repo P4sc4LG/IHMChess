@@ -1,12 +1,7 @@
-import java.awt.Color;
-import java.io.File;
-
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,24 +10,45 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import static javafx.scene.layout.BackgroundPosition.CENTER;
 import static javafx.scene.layout.BackgroundRepeat.*;
-import static javafx.scene.layout.BackgroundSize.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class App extends Application{
     private  String jWhite;
     private  String jBlack;
+    int initialX,initialY,destinationX,destinationY;
+    Piece selectedPiece;
+    GridPane root = new GridPane();
+    static List<Piece> lesPieces = new ArrayList();
+    public String trait = "white";
+    
+  
+    
     @Override
     public void start(Stage stage){
+    	
         Button startButton = new Button("Start");
         startButton.setId("button-style");
         Button leaveButton = new Button("Quit");
@@ -83,18 +99,86 @@ public class App extends Application{
                     stageError.setTitle("Error");
                     stageError.show();
                 }else{
-                    jWhite = textFieldWhite.getText();
-                    jBlack = textFieldBlack.getText();
-                    Label blackLabel = new Label("Joueur Noir : "+jBlack);
-                    Label whiteLabel = new Label("Joueur Blanc : "+jWhite);
-                    
-                    VBox vb = new VBox(blackLabel,whiteLabel);
-                    vb.setAlignment(Pos.CENTER);
-                    vb.setPadding(new Insets(15,15,15,150));
-                    Scene sc = new Scene(vb,600,600);
-                    stage.setTitle("Echec");
-                    stage.setScene(sc);
-                    stage.show();
+                	  
+                	     
+                      Color lightGray = Color.LIGHTGRAY;
+                      Color darkGray = Color.DARKGRAY;
+                      
+
+                      for (int row = 0; row < 8; row++) {
+                          for (int col = 0; col < 8; col++) {
+                              if ((row + col) % 2 == 0) {
+                              	Rectangle r = new Rectangle(50, 50, lightGray);
+                                  GridPane.setRowIndex(r, row);
+                                  GridPane.setColumnIndex(r, col);
+                                  root.getChildren().add(r);
+                                  r.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                              	    @Override
+                              	    public void handle(MouseEvent t) {
+                              	    	Rectangle r = (Rectangle)t.getTarget();
+                              	    		if(r.getFill().equals(Color.BLUE)) {
+                              	    			if(trait.equals("black")) {
+                                  	    			trait="white";
+                                  	    		}else {trait="black";}
+                              	    			root.getChildren().remove(selectedPiece.getV());
+                              	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
+                              	    			
+                              	    			selectedPiece.x=GridPane.getColumnIndex(r);
+                              	    			selectedPiece.y=GridPane.getRowIndex(r);
+                              	    			if(selectedPiece instanceof pion) { 
+                                  	    			pion pp = (pion)selectedPiece;
+                                  	    			pp.firstMove=false;
+                                  	    			}
+                              	    			selectedPiece=null;
+                              	    			resetColor();
+                              	    		}
+                              	    	
+                              	        }});
+          
+                              } else {
+                              	 Rectangle r = new Rectangle(50, 50, darkGray);
+                                   GridPane.setRowIndex(r, row);
+                                   GridPane.setColumnIndex(r, col);
+                                   root.getChildren().add(r);
+                                   r.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                 	    @Override
+                                 	    public void handle(MouseEvent t) {
+                                 	    	Rectangle r = (Rectangle)t.getTarget();
+                                 	    		if(r.getFill().equals(Color.BLUE)) {
+                                 	    			if(trait.equals("black")) {
+                                      	    			trait="white";
+                                      	    		}else {trait="black";}
+                                 	    			root.getChildren().remove(selectedPiece.getV());
+                                 	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
+                                 	    			if(selectedPiece instanceof pion) { 
+                                      	    			pion pp = (pion)selectedPiece;
+                                      	    			pp.firstMove=false;
+                                      	    			}
+                                 	    			selectedPiece.x=GridPane.getColumnIndex(r);
+                                  	    			selectedPiece.y=GridPane.getRowIndex(r);
+                                  	    			selectedPiece=null;
+                                  	    			resetColor();
+                                 	    		}
+                                 	        }});
+                              }
+                          }
+                      }
+                   ;
+                   	genPiece();
+
+                  
+                      
+                   
+                   
+                      
+                     
+                      
+                      Scene scene = new Scene(root);
+                      stage.setScene(scene);
+                      stage.setTitle("JavaFX Chess Board");
+                      stage.show();
+                	
                 }
             });
             VBox vChoix = new VBox(titre,joueurWhite,joueurBlack,submitButton);
@@ -129,8 +213,179 @@ public class App extends Application{
         stage.setScene(sc);
         stage.show();  
     }
+    public void genPiece() {
+    	   for (int i = 0; i < 8; i++) {
+               pion p = new pion("black",i,1);
+               lesPieces.add(p);
+     
+                root.add(p.getImageView(), i, 1);
+                GridPane.setRowIndex(p.getImageView(), 1);
+                GridPane.setColumnIndex(p.getImageView(), i);
+                pion p2 = new pion("white",i,6);
+                lesPieces.add(p2);
+                root.add(p2.getImageView(), i, 6);
+            }
+    	   
+    	   king king = new king("black",3,0);
+    	   king king2 = new king("white",3,7);
+    	   root.add(king.getImageView(), 3, 0);
+    	   root.add(king2.getImageView(), 3, 7);
+    	   
+    	   
+    	   queen queen = new queen("black",4,0);
+    	   queen queen2 = new queen("white",4,7);
+    	   root.add(queen.getImageView(), 4, 0);
+    	   root.add(queen2.getImageView(), 4, 7);
+    	   
+    	   knight knight = new knight("black",6,0);
+    	   knight knight2 = new knight("black",1,0);
+    	   root.add(knight.getImageView(), 6, 0);
+    	   root.add(knight2.getImageView(), 1,0 );
+    	   
+    	   knight knight3 = new knight("white",6,7);
+    	   knight knight4 = new knight("white",1,7);
+    	   root.add(knight3.getImageView(), 6, 7);
+    	   root.add(knight4.getImageView(), 1,7 );
+    	   
+    	 
+    	   bishop bishop = new bishop("black",5,0);
+    	   bishop bishop2 = new bishop("black",2,0);
+    	   root.add(bishop.getImageView(), 5, 0);
+    	   root.add(bishop2.getImageView(), 2,0 );
+    	   
+    	   bishop bishop3 = new bishop("white",5,7);
+    	   bishop bishop4 = new bishop("white",2,7);
+    	   root.add(bishop3.getImageView(), 5, 7);
+    	   root.add(bishop4.getImageView(), 2,7 );
+    	   
+    	   rook rook = new rook("black",7,0);
+    	   rook rook1 = new rook("black",0,0);
+    	   root.add(rook.getImageView(), 7, 0);
+    	   root.add(rook1.getImageView(), 0,0 );
+    	   
+    	   rook rook2 = new rook("white",0,7);
+    	   rook rook3 = new rook("white",7,7);
+    	   root.add(rook2.getImageView(), 0, 7);
+    	   root.add(rook3.getImageView(), 7,7 );
+    	   lesPieces.add(queen);
+    	   lesPieces.add(queen2);
+    	   lesPieces.add(king);
+    	   lesPieces.add(king2);
+    	   lesPieces.add(rook3);
+    	   lesPieces.add(rook2);
+    	   lesPieces.add(rook);
+    	   lesPieces.add(rook1);
+    	   lesPieces.add(bishop4);
+    	   lesPieces.add(bishop);
+    	   lesPieces.add(bishop3);
+    	   lesPieces.add(bishop2);
+    	   lesPieces.add(knight);
+    	   lesPieces.add(knight2);
+    	   lesPieces.add(knight3);
+    	   lesPieces.add(knight4);
+    	   creerEventHandler();
+    	
+    }
+  private void creerEventHandler() {
+	  for (Piece p :lesPieces) {
+		  p.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+      	    @Override
+      	    public void handle(MouseEvent t) {
+      	        ImageView v =(ImageView)t.getSource();
+          	    Piece p =(Piece)getPieceByImageView(v);
+          	    
+      	    if(selectedPiece==null ) {
+      	    	if ( p.couleur.equals(trait)) {
+      	    	resetColor();
+      	    	selectedPiece=p;
+      	    	p.afficheCase(lesPieces,root);
+      	    	}
+      	    	
+      	    }else {
+      	    	if(selectedPiece.couleur.equals(p.couleur)) {
+      	    		resetColor();
+      	    		selectedPiece=p;
+      	    		p.afficheCase(lesPieces, root);
+      	    	}else {
+      	    		if( ((Rectangle) getRectByRowColumnIndex(p.getY(), p.getX(), root)).getFill().equals(Color.BLUE)) {
+      	    		if(selectedPiece instanceof pion) { 
+      	    			pion pp = (pion)selectedPiece;
+      	    			pp.firstMove=false;
+      	    			}
+      	    		selectedPiece.setX(p.getX());
+      	    		selectedPiece.setY(p.getY());
+      	    		lesPieces.remove(p);
+      	    		root.getChildren().remove(p.getImageView());
+      	    		root.getChildren().remove(selectedPiece.getV());
+      	    		root.add(selectedPiece.getV(), selectedPiece.getX(), selectedPiece.getY());
+      	    		selectedPiece=null;
+      	    		if(trait.equals("black")) {
+      	    			trait="white";
+      	    		}else {trait="black";}
+      	    		resetColor();}
+      	    }
+      	    
+      	    }
+      	  }});
+	  }
+		
+	}
+
+  public Piece getPieceByImageView(ImageView v) {
+	  for (int i = 0;i<lesPieces.size();i++) {
+		  if (lesPieces.get(i).getV().equals(v)) {
+			  return lesPieces.get(i);
+		  }
+	  }
+	  return null;
+  }
+    
     public static void main(String[] args){
         launch(args);
+    }
+    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column && node instanceof ImageView) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
+    
+    public Node getRectByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column && node instanceof Rectangle) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
+    public void resetColor() {
+    	for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                if ((row + col) % 2 == 0) {
+                	Rectangle r= (Rectangle) getRectByRowColumnIndex(row, col, root);
+                	r.setFill(Color.LIGHTGRAY);
+                	
+                }
+                else {
+                	Rectangle r= (Rectangle) getRectByRowColumnIndex(row, col, root);
+                	r.setFill(Color.DARKGREY);
+                }
+                	}
+                }
+    	
     }
     
 }
