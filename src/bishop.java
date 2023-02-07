@@ -48,6 +48,7 @@ public class bishop extends Piece{
 		this.imageView = new ImageView(image);
 		super.setV(this.imageView);
 	}
+
     public Node getRectByRowColumnIndex (final int row, final int column, GridPane gridPane) {
         Node result = null;
         ObservableList<Node> childrens = gridPane.getChildren();
@@ -161,5 +162,4 @@ public class bishop extends Piece{
 
 		//comment
     	
-	
 }
