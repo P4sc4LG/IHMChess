@@ -14,9 +14,7 @@ public class Piece {
 		
 		
 	}
-	public ImageView getV() {
-		return v;
-	}
+	
 	public int getX() {
 		return x;
 	}
@@ -38,6 +36,11 @@ public class Piece {
 	}
 	
 	public  void afficheCase(List<Piece> lesPieces, GridPane root) {
+	}
+
+	public ImageView getV() {
+		return v;
+	
 	}
 	
 

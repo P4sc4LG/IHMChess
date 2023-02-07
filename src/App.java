@@ -10,10 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import static javafx.scene.layout.BackgroundPosition.CENTER;
 import static javafx.scene.layout.BackgroundRepeat.*;
-
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.List;	
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
@@ -21,19 +19,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 public class App extends Application{
     private  String jWhite;
@@ -102,7 +94,7 @@ public class App extends Application{
                     stageError.show();
                 }else{
                 	  
-                	     
+                	  
                       Color lightGray = Color.LIGHTGRAY;
                       Color darkGray = Color.DARKGRAY;
                       
