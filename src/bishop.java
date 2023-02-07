@@ -159,7 +159,7 @@ public class bishop extends Piece{
 		
     }
 
-		
+		//comment
     	
 	
 }
