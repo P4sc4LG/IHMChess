@@ -53,58 +53,58 @@ public class knight extends Piece{
 		if(super.y-2>=0&&super.x-1>=0) {
 			if((ImageView)getNodeByRowColumnIndex(super.y-2, super.x-1, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y-2, super.x-1, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y-2, super.x-1, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y-2, super.x-1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y-2, super.x-1, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y-2, super.x-1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		if(super.y-2>=0&&super.x+1<=7) {
 			if((ImageView)getNodeByRowColumnIndex(super.y-2, super.x+1, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y-2, super.x+1, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y-2, super.x+1, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y-2, super.x+1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y-2, super.x+1, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y-2, super.x+1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		if(super.y-1>=0&&super.x+2<=7) {
 			if((ImageView)getNodeByRowColumnIndex(super.y-1, super.x+2, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y-1, super.x+2, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y-1, super.x+2, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y-1, super.x+2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y-1, super.x+2, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y-1, super.x+2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		if(super.y-1>=0&&super.x-2>=0) {
 			if((ImageView)getNodeByRowColumnIndex(super.y-1, super.x-2, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y-1, super.x-2, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y-1, super.x-2, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y-1, super.x-2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y-1, super.x-2, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y-1, super.x-2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		if(super.y+1<=7&&super.x-2>=0) {
 			if((ImageView)getNodeByRowColumnIndex(super.y+1, super.x-2, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y+1, super.x-2, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y+1, super.x-2, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y+1, super.x-2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y+1, super.x-2, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y+1, super.x-2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		if(super.y+1<=7&&super.x+2<=7) {
 			if((ImageView)getNodeByRowColumnIndex(super.y+1, super.x+2, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y+1, super.x+2, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y+1, super.x+2, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y+1, super.x+2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y+1, super.x+2, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y+1, super.x+2, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		if(super.y+2<=7&&super.x-1>=0) {
 			if((ImageView)getNodeByRowColumnIndex(super.y+2, super.x-1, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y+2, super.x-1, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y+2, super.x-1, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y+2, super.x-1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y+2, super.x-1, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y+2, super.x-1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		if(super.y+2<=7&&super.x+1<=7) {
 			if((ImageView)getNodeByRowColumnIndex(super.y+2, super.x+1, root)!=null) {
 				if(!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y+2, super.x+1, root)).couleur.equals(this.couleur)) {
-					((Rectangle) getRectByRowColumnIndex(super.y+2, super.x+1, root)).setFill(javafx.scene.paint.Color.BLUE);
+					((Rectangle) getRectByRowColumnIndex(super.y+2, super.x+1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 				}
-			}else {((Rectangle) getRectByRowColumnIndex(super.y+2, super.x+1, root)).setFill(javafx.scene.paint.Color.BLUE);}
+			}else {((Rectangle) getRectByRowColumnIndex(super.y+2, super.x+1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);}
 		}
 		
 	}

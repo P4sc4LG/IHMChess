@@ -58,30 +58,30 @@ public class pion extends Piece {
 	public void afficheCase(List<Piece> lesPieces, GridPane root) {
 		if(this.couleur.equals("black")) {
 		if((ImageView)getNodeByRowColumnIndex(super.y+1, super.x-1, root)!=null&&!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y+1, super.x-1, root)).couleur.equals(this.couleur)){
-			((Rectangle) getRectByRowColumnIndex(super.y+1, super.x-1, root)).setFill(javafx.scene.paint.Color.BLUE);
+			((Rectangle) getRectByRowColumnIndex(super.y+1, super.x-1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 		}
 		if((ImageView)getNodeByRowColumnIndex(super.y+1, super.x+1, root)!=null&&!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y+1, super.x+1, root)).couleur.equals(this.couleur)){
-			((Rectangle) getRectByRowColumnIndex(super.y+1, super.x+1, root)).setFill(javafx.scene.paint.Color.BLUE);
+			((Rectangle) getRectByRowColumnIndex(super.y+1, super.x+1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 		}
 		if((ImageView)getNodeByRowColumnIndex(super.y+1, super.x, root)==null) {
-			((Rectangle) getRectByRowColumnIndex(super.y+1, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
+			((Rectangle) getRectByRowColumnIndex(super.y+1, super.x, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 		}
 		if((ImageView)getNodeByRowColumnIndex(super.y+2, super.x, root)==null && firstMove) {
-			((Rectangle) getRectByRowColumnIndex(super.y+2, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
+			((Rectangle) getRectByRowColumnIndex(super.y+2, super.x, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 		}
 		}
 		else {
 			if((ImageView)getNodeByRowColumnIndex(super.y-1, super.x-1, root)!=null&&!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y-1, super.x-1, root)).couleur.equals(this.couleur)){
-				((Rectangle) getRectByRowColumnIndex(super.y-1, super.x-1, root)).setFill(javafx.scene.paint.Color.BLUE);
+				((Rectangle) getRectByRowColumnIndex(super.y-1, super.x-1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 			}
 			if((ImageView)getNodeByRowColumnIndex(super.y-1, super.x+1, root)!=null&&!getPieceByImageView((ImageView)getNodeByRowColumnIndex(super.y-1, super.x+1, root)).couleur.equals(this.couleur)){
-				((Rectangle) getRectByRowColumnIndex(super.y-1, super.x+1, root)).setFill(javafx.scene.paint.Color.BLUE);
+				((Rectangle) getRectByRowColumnIndex(super.y-1, super.x+1, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 			}
 			if((ImageView)getNodeByRowColumnIndex(super.y-1, super.x, root)==null) {
-				((Rectangle) getRectByRowColumnIndex(super.y-1, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
+				((Rectangle) getRectByRowColumnIndex(super.y-1, super.x, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 			}
 			if((ImageView)getNodeByRowColumnIndex(super.y-2, super.x, root)==null && firstMove) {
-				((Rectangle) getRectByRowColumnIndex(super.y-2, super.x, root)).setFill(javafx.scene.paint.Color.BLUE);
+				((Rectangle) getRectByRowColumnIndex(super.y-2, super.x, root)).setFill(javafx.scene.paint.Color.DARKBLUE);
 			}
 			}
 		
