@@ -131,13 +131,24 @@ public class App extends Application{
                     Text nomJWhiteV = new Text("Joueur Blanc : "+jWhite);
                     nomJBlack.setId("text-style-joueur-echec-stage");
                     nomJWhiteV.setId("text-style-joueur-echec-stage");
+			
                     VBox v1 = new VBox();
                     v1.setPadding(new Insets(40,270,40,40));
                     v1.setBorder(new Border(new BorderStroke(Color.BLACK, 
-                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-                    v1.getChildren().addAll(nomJBlack,labelNoir,nomJWhiteV,labelBlanc);
-                    HBox mainContainer = new HBox(root,v1);
-                    Scene scene = new Scene(mainContainer,700,400);
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.EMPTY)));
+                    v1.getChildren().addAll(nomJBlack,labelNoir);
+                    
+                    VBox v2 = new VBox();
+                    v2.setPadding(new Insets(215,0,40,40));
+                    v2.setBorder(new Border(new BorderStroke(Color.BLACK, 
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.EMPTY)));
+                    v2.getChildren().addAll(nomJWhiteV,labelBlanc);
+                    
+                    VBox timer = new VBox(v1,v2);
+                    
+                    HBox mainContainer = new HBox(root,timer);
+                    
+                    Scene scene = new Scene(mainContainer,600,400);
                     
                 	  
                       Color lightGray = Color.LIGHTGRAY;
