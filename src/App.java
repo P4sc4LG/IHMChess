@@ -48,7 +48,6 @@ public class App extends Application{
     public String trait = "white";
     PauseTransition timerBlanc = new PauseTransition(Duration.minutes(1));
     PauseTransition timerNoir = new PauseTransition(Duration.minutes(1));
-  
     
   
     
@@ -109,17 +108,21 @@ public class App extends Application{
                 	Label labelBlanc = new Label();
                 	labelBlanc.setFont(Font.font("Arial", 20));
                 	labelBlanc.textProperty().bind(timeLeftAsString(timerBlanc));
+
                 	labelBlanc.textProperty().addListener((observable, oldValue, newValue) -> {
                 		if(newValue.equals("00:00")) {
-                  			System.out.println("partie finis");
+                            Image im = new Image("background/backgroundBlackWin.jpg");
+                            endGameScreen(stage, "le temps ",jBlack,im);
                   		}
                 	});
                 	Label labelNoir = new Label();
                 	labelNoir.setFont(Font.font("Arial", 20));
                 	labelNoir.textProperty().bind(timeLeftAsString(timerNoir));
+
                 	labelNoir.textProperty().addListener((observable, oldValue, newValue) -> {
               		if(newValue.equals("00:00")) {
-              			System.out.println("partie finis");
+                        Image im = new Image("background/backgroundWhiteWin.jpg");
+                        endGameScreen(stage, "le temps ",jWhite,im);
               		}
               	});
                     jBlack = textFieldBlack.getText();
@@ -225,7 +228,8 @@ public class App extends Application{
                           }
                       }
                    ;
-                   	genPiece();
+                   	genPiece(stage);
+
 
                   
                       
@@ -235,6 +239,7 @@ public class App extends Application{
                      
                       
                       timerBlanc.play();
+                      
                       stage.setScene(scene);
                       stage.setTitle("JavaFX Chess Board");
                       stage.show();
@@ -273,7 +278,7 @@ public class App extends Application{
         stage.setScene(sc);
         stage.show();  
     }
-    public void genPiece() {
+    public void genPiece(Stage stage) {
     	   for (int i = 0; i < 8; i++) {
                pion p = new pion("black",i,1);
                lesPieces.add(p);
@@ -343,10 +348,10 @@ public class App extends Application{
     	   lesPieces.add(knight2);
     	   lesPieces.add(knight3);
     	   lesPieces.add(knight4);
-    	   creerEventHandler();
+    	   creerEventHandler(stage);
     	
     }
-  private void creerEventHandler() {
+  private void creerEventHandler(Stage stage) {
 	  for (Piece p :lesPieces) {
 		  p.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -399,7 +404,10 @@ public class App extends Application{
       	    			System.out.println("partie finis le joueur "+p.couleur+ "à perdu");
       	    			timerBlanc.stop();
       	    			timerNoir.stop();
-      	    			
+                        String winner = (p.couleur.equals("black"))?jWhite:jBlack;
+                        Image im = (winner.equals(jBlack)) ? new Image("background/backgroundBlackWin2.jpg") : new Image("background/backgroundWhiteWin2.jpg");
+                        
+                        endGameScreen(stage, "roi en echec et mat ",winner,im);
       	    		}
       	    }
       	    
@@ -408,7 +416,184 @@ public class App extends Application{
 	  }
 		
 	}
+  public void endGameScreen(Stage stage, String mess, String winner, Image im){
+        System.out.println("partie finis");
+        Label blackWinLabel = new Label("Victoire de "+winner+" avec "+mess);
+        //change interface 
+        VBox vButton = new VBox();
+        Button restart = new Button("Restart");
+        restart.setOnAction(e -> {
+            Label labelBlanc = new Label();
+                	labelBlanc.setFont(Font.font("Arial", 20));
+                	labelBlanc.textProperty().bind(timeLeftAsString(timerBlanc));
 
+                	labelBlanc.textProperty().addListener((observable, oldValue, newValue) -> {
+                		if(newValue.equals("00:00")) {
+                            Image ima = new Image("background/backgroundBlackWin.jpg");
+                            endGameScreen(stage, "le temps ",jBlack,ima);
+                  		}
+                	});
+                	Label labelNoir = new Label();
+                	labelNoir.setFont(Font.font("Arial", 20));
+                	labelNoir.textProperty().bind(timeLeftAsString(timerNoir));
+
+                	labelNoir.textProperty().addListener((observable, oldValue, newValue) -> {
+              		if(newValue.equals("00:00")) {
+                        Image ima = new Image("background/backgroundWhiteWin.png");
+                        endGameScreen(stage, "le temps ",jWhite,ima);
+              		}
+              	});
+                    
+                    Text nomJBlack = new Text("Joueur Noir : "+jBlack);
+                    Text nomJWhiteV = new Text("Joueur Blanc : "+jWhite);
+                    nomJBlack.setId("text-style-joueur-echec-stage");
+                    nomJWhiteV.setId("text-style-joueur-echec-stage");
+                    VBox v1 = new VBox();
+                    v1.setPadding(new Insets(40,270,40,40));
+                    v1.setBorder(new Border(new BorderStroke(Color.BLACK, 
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                    v1.getChildren().addAll(nomJBlack,labelNoir,nomJWhiteV,labelBlanc);
+                    HBox mainContainer = new HBox(root,v1);
+                    Scene scene = new Scene(mainContainer,700,400);
+                    
+                	  
+                      Color lightGray = Color.LIGHTGRAY;
+                      Color darkGray = Color.DARKGRAY;
+                      trait = "white";
+                      root.getChildren().clear();
+                      lesPieces.clear();
+
+                      for (int row = 0; row < 8; row++) {
+                          for (int col = 0; col < 8; col++) {
+                              if ((row + col) % 2 == 0) {
+                              	Rectangle r = new Rectangle(50, 50, lightGray);
+                                  GridPane.setRowIndex(r, row);
+                                  GridPane.setColumnIndex(r, col);
+                                  root.getChildren().add(r);
+                                  r.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                              	    @Override
+                              	    public void handle(MouseEvent t) {
+                              	    	Rectangle r = (Rectangle)t.getTarget();
+                              	    		if(r.getFill().equals(Color.BLUE)) {
+                              	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
+                             	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
+                             	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
+                             	    			}
+                              	    			root.getChildren().remove(selectedPiece.getV());
+                              	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
+                              	    			
+                              	    			selectedPiece.x=GridPane.getColumnIndex(r);
+                              	    			selectedPiece.y=GridPane.getRowIndex(r);
+                              	    			if(selectedPiece instanceof pion) { 
+                                  	    			pion pp = (pion)selectedPiece;
+                                  	    			pp.firstMove=false;
+                                  	    			}
+                              	    			if(selectedPiece.couleur.equals("black")) {
+                                  	    			trait="white";
+                                  	    			timerBlanc.play();
+                                  	    			timerNoir.pause();
+                                  	    		}
+                                  	    		else {
+                                  	    			trait="black";
+                                  	    			timerNoir.play();
+                                  	    			timerBlanc.pause();
+                                  	    		}
+                              	    			selectedPiece=null;
+                              	    			resetColor();
+                              	    		  System.out.println("trait : " +trait);
+                              	    		}
+                              	    	
+                              	        }});
+          
+                              } else {
+                              	 Rectangle r = new Rectangle(50, 50, darkGray);
+                                   GridPane.setRowIndex(r, row);
+                                   GridPane.setColumnIndex(r, col);
+                                   root.getChildren().add(r);
+                                   r.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                 	    @Override
+                                 	    public void handle(MouseEvent t) {
+                                 	    	Rectangle r = (Rectangle)t.getTarget();
+                                 	    		if(r.getFill().equals(Color.BLUE)) {
+                                 	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
+                                 	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
+                                 	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
+                                 	    			}
+                                 	    			root.getChildren().remove(selectedPiece.getV());
+                                 	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
+                                 	    			if(selectedPiece instanceof pion) { 
+                                      	    			pion pp = (pion)selectedPiece;
+                                      	    			pp.firstMove=false;
+                                      	    			}
+                                 	    			selectedPiece.x=GridPane.getColumnIndex(r);
+                                  	    			selectedPiece.y=GridPane.getRowIndex(r);
+                                  	    			if(selectedPiece.couleur.equals("black")) {
+                                      	    			trait="white";
+                                      	    			timerBlanc.play();
+                                      	    			timerNoir.pause();
+                                      	    		}
+                                      	    		else {
+                                      	    			trait="black";
+                                      	    			timerNoir.play();
+                                      	    			timerBlanc.pause();
+                                      	    		}
+                                  	    			selectedPiece=null;
+                                  	    			resetColor();
+                                  	    		  System.out.println("trait : " +trait);
+                                 	    		}
+                                 	        }});
+                              }
+                          }
+                      }
+                   ;
+                   	genPiece(stage);
+
+
+                  
+                      
+                   
+                   
+                      
+                     
+                      
+                      timerBlanc.play();
+                      
+                      stage.setScene(scene);
+                      stage.setTitle("JavaFX Chess Board");
+                      stage.show();
+        });
+
+        restart.setId("button-style");
+        Button leave = new Button("Quit");
+
+        leave.setOnAction(e -> {
+            stage.close();
+        });
+        leave.setId("button-style");
+        vButton.setSpacing(10);
+        vButton.getChildren().addAll(restart,leave);
+        vButton.setAlignment(Pos.CENTER);
+        if(winner.equals(jBlack)){
+            vButton.setId("form-winner-black");
+        }else{
+            vButton.setId("form-winner-white");
+        }
+        
+        Scene sc = new Scene(vButton,600,600);
+        sc.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        stage.setTitle("End-Game");
+        stage.setScene(sc);
+        stage.show(); 
+        //popup
+        StackPane st = new StackPane();
+        st.getChildren().add(blackWinLabel);
+        Stage stageError = new Stage();
+        Scene sceneError = new Scene(st,300,100);
+        stageError.setScene(sceneError);
+        stageError.setTitle("Defeat");
+        stageError.show();
+  }
   public Piece getPieceByImageView(ImageView v) {
 	  for (int i = 0;i<lesPieces.size();i++) {
 		  if (lesPieces.get(i).getV().equals(v)) {

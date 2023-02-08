@@ -3,6 +3,16 @@
     -fx-background-size: 900 600;
     -fx-background-position: center center;
 }
+#form-winner-black{
+    -fx-background-image: url("background/backgroundBlackWin2.jpg");
+    -fx-background-size: 670 630;
+    -fx-background-position: center center;
+}
+#form-winner-white{
+    -fx-background-image: url("background/backgroundJoueur.jpg");
+    -fx-background-size: 1000 750;
+    -fx-background-position: center center;
+}
 #text-style-titre{
     -fx-text-fill: White;
     -fx-font-weight:bold;
