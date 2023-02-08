@@ -1,4 +1,8 @@
+import javafx.animation.Animation;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,11 +18,18 @@ import java.util.ArrayList;
 import java.util.List;	
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -35,7 +46,8 @@ public class App extends Application{
     GridPane root = new GridPane();
     static List<Piece> lesPieces = new ArrayList();
     public String trait = "white";
-    
+    PauseTransition timerBlanc = new PauseTransition(Duration.minutes(10));
+    PauseTransition timerNoir = new PauseTransition(Duration.minutes(10));
   
     
   
@@ -46,6 +58,7 @@ public class App extends Application{
         Button startButton = new Button("Start");
         startButton.setId("button-style");
         Button leaveButton = new Button("Quit");
+       
         leaveButton.setId("button-style");
         /*btn.setOnAction(e -> {
             StackPane root2 = new StackPane();
@@ -93,7 +106,26 @@ public class App extends Application{
                     stageError.setTitle("Error");
                     stageError.show();
                 }else{
-                	  
+                	Label labelBlanc = new Label();
+                	labelBlanc.setFont(Font.font("Arial", 20));
+                	labelBlanc.textProperty().bind(timeLeftAsString(timerBlanc));
+                	Label labelNoir = new Label();
+                	labelNoir.setFont(Font.font("Arial", 20));
+                	labelNoir.textProperty().bind(timeLeftAsString(timerNoir));
+                    jBlack = textFieldBlack.getText();
+                    jWhite = textFieldWhite.getText();
+                    Text nomJBlack = new Text("Joueur Noir : "+jBlack);
+                    Text nomJWhiteV = new Text("Joueur Blanc : "+jWhite);
+                    nomJBlack.setId("text-style-joueur-echec-stage");
+                    nomJWhiteV.setId("text-style-joueur-echec-stage");
+                    VBox v1 = new VBox();
+                    v1.setPadding(new Insets(40,270,40,40));
+                    v1.setBorder(new Border(new BorderStroke(Color.BLACK, 
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                    v1.getChildren().addAll(nomJBlack,labelNoir,nomJWhiteV,labelBlanc);
+                    HBox mainContainer = new HBox(root,v1);
+                    Scene scene = new Scene(mainContainer,700,400);
+                    
                 	  
                       Color lightGray = Color.LIGHTGRAY;
                       Color darkGray = Color.DARKGRAY;
@@ -123,12 +155,17 @@ public class App extends Application{
                                   	    			}
                               	    			if(selectedPiece.couleur.equals("black")) {
                                   	    			trait="white";
+                                  	    			timerBlanc.play();
+                                  	    			timerNoir.pause();
                                   	    		}
                                   	    		else {
                                   	    			trait="black";
+                                  	    			timerNoir.play();
+                                  	    			timerBlanc.pause();
                                   	    		}
                               	    			selectedPiece=null;
                               	    			resetColor();
+                              	    		  System.out.println("trait : " +trait);
                               	    		}
                               	    	
                               	        }});
@@ -153,12 +190,17 @@ public class App extends Application{
                                   	    			selectedPiece.y=GridPane.getRowIndex(r);
                                   	    			if(selectedPiece.couleur.equals("black")) {
                                       	    			trait="white";
+                                      	    			timerBlanc.play();
+                                      	    			timerNoir.pause();
                                       	    		}
                                       	    		else {
                                       	    			trait="black";
+                                      	    			timerNoir.play();
+                                      	    			timerBlanc.pause();
                                       	    		}
                                   	    			selectedPiece=null;
                                   	    			resetColor();
+                                  	    		  System.out.println("trait : " +trait);
                                  	    		}
                                  	        }});
                               }
@@ -174,7 +216,7 @@ public class App extends Application{
                       
                      
                       
-                      Scene scene = new Scene(root);
+                      timerBlanc.play();
                       stage.setScene(scene);
                       stage.setTitle("JavaFX Chess Board");
                       stage.show();
@@ -320,11 +362,16 @@ public class App extends Application{
       	    		root.getChildren().remove(selectedPiece.getV());
       	    		root.add(selectedPiece.getV(), selectedPiece.getX(), selectedPiece.getY());
       	    		if(selectedPiece.couleur.equals("black")) {
+      	    			timerNoir.pause();
+      	    			timerBlanc.play();
       	    			trait="white";
       	    		}
       	    		else {
+      	    			timerNoir.play();
+      	    			timerBlanc.pause();
       	    			trait="black";
       	    		}
+      	    		 System.out.println("trait : " +trait);
       	    		selectedPiece=null;
       	    		resetColor();}
       	    }
@@ -390,6 +437,19 @@ public class App extends Application{
                 }
     	
     }
+    public StringBinding timeLeftAsString(Animation animation) {
+        return Bindings.createStringBinding(
+            () -> {
+              double currentTime = animation.getCurrentTime().toMillis();
+              double totalTime = animation.getCycleDuration().toMillis();
+              long remainingTime = Math.round(totalTime - currentTime);
+              java.time.Duration dur = java.time.Duration.ofMillis(remainingTime);
+              return String.format(
+                  "%02d:%02d:%03d", dur.toMinutes(), dur.toSecondsPart(), dur.toMillisPart());
+            },
+            animation.currentTimeProperty(),
+            animation.cycleDurationProperty());
+      }
     
 }
 //comment
