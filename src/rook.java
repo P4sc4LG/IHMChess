@@ -53,11 +53,11 @@ public class rook extends Piece{
 		for (int i = super.x+1;i<=7;i++) {
 			if(!piece) {
 				if(((ImageView)getNodeByRowColumnIndex(super.y, i, root)==null)){
-					((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.BLUE);
+					((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.DARKBLUE);
 				}else {
 					piece=true;
 					if(getPieceByImageView((ImageView) getNodeByRowColumnIndex(super.y, i, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.DARKBLUE);
 					}
 				}
 			}
@@ -66,11 +66,11 @@ public class rook extends Piece{
 		for (int i = super.x-1;i>=0;i--) {
 			if(!piece) {
 				if(((ImageView)getNodeByRowColumnIndex(super.y, i, root)==null)){
-					((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.BLUE);
+					((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.DARKBLUE);
 				}else {
 					piece=true;
 					if(getPieceByImageView((ImageView) getNodeByRowColumnIndex(super.y, i, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(super.y, i, root)).setFill(Color.DARKBLUE);
 					}
 				}
 			}
@@ -79,11 +79,11 @@ public class rook extends Piece{
 		for (int i = super.y-1;i>=0;i--) {
 			if(!piece) {
 				if(((ImageView)getNodeByRowColumnIndex(i, super.x, root)==null)){
-					((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.BLUE);
+					((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.DARKBLUE);
 				}else {
 					piece=true;
 					if(getPieceByImageView((ImageView) getNodeByRowColumnIndex(i, super.x, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.DARKBLUE);
 					}
 				}
 			}
@@ -92,11 +92,11 @@ public class rook extends Piece{
 		for (int i = super.y+1;i<=7;i++) {
 			if(!piece) {
 				if(((ImageView)getNodeByRowColumnIndex(i, super.x, root)==null)){
-					((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.BLUE);
+					((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.DARKBLUE);
 				}else {
 					piece=true;
 					if(getPieceByImageView((ImageView) getNodeByRowColumnIndex(i, super.x, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x, root)).setFill(Color.DARKBLUE);
 					}
 				}
 			}

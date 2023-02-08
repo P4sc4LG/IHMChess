@@ -167,7 +167,7 @@ public class App extends Application{
                               	    @Override
                               	    public void handle(MouseEvent t) {
                               	    	Rectangle r = (Rectangle)t.getTarget();
-                              	    		if(r.getFill().equals(Color.BLUE)) {
+                              	    		if(r.getFill().equals(Color.DARKBLUE)) {
                               	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
                              	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
                              	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
@@ -207,7 +207,7 @@ public class App extends Application{
                                  	    @Override
                                  	    public void handle(MouseEvent t) {
                                  	    	Rectangle r = (Rectangle)t.getTarget();
-                                 	    		if(r.getFill().equals(Color.BLUE)) {
+                                 	    		if(r.getFill().equals(Color.DARKBLUE)) {
                                  	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
                                  	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
                                  	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
@@ -384,7 +384,7 @@ public class App extends Application{
       	    		selectedPiece=p;
       	    		p.afficheCase(lesPieces, root);
       	    	}else {
-      	    		if( ((Rectangle) getRectByRowColumnIndex(p.getY(), p.getX(), root)).getFill().equals(Color.BLUE)) {
+      	    		if( ((Rectangle) getRectByRowColumnIndex(p.getY(), p.getX(), root)).getFill().equals(Color.DARKBLUE)) {
       	    		if(selectedPiece instanceof pion) { 
       	    			pion pp = (pion)selectedPiece;
       	    			pp.firstMove=false;
@@ -497,7 +497,7 @@ public class App extends Application{
                               	    @Override
                               	    public void handle(MouseEvent t) {
                               	    	Rectangle r = (Rectangle)t.getTarget();
-                              	    		if(r.getFill().equals(Color.BLUE)) {
+                              	    		if(r.getFill().equals(Color.DARKBLUE)) {
                               	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
                              	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
                              	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
@@ -537,7 +537,7 @@ public class App extends Application{
                                  	    @Override
                                  	    public void handle(MouseEvent t) {
                                  	    	Rectangle r = (Rectangle)t.getTarget();
-                                 	    		if(r.getFill().equals(Color.BLUE)) {
+                                 	    		if(r.getFill().equals(Color.DARKBLUE)) {
                                  	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
                                  	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
                                  	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));

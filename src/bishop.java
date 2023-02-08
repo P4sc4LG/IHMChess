@@ -91,11 +91,11 @@ public class bishop extends Piece{
 			if(!piece) {
 			
 					if(super.x-1-count>=0&&((ImageView)getNodeByRowColumnIndex(i, super.x-1-count, root)==null) ){
-						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.DARKBLUE);
 					}else {
 						piece=true;
 						if(super.x-1-count>=0&&getPieceByImageView((ImageView) getNodeByRowColumnIndex(i, super.x-1-count, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.DARKBLUE);
 						}
 					}
 		
@@ -109,11 +109,11 @@ public class bishop extends Piece{
 			if(!piece) {
 			
 					if(super.x+1+count<=7&&((ImageView)getNodeByRowColumnIndex(i, super.x+1+count, root)==null) ){
-						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.DARKBLUE);
 					}else {
 						piece=true;
 						if(super.x+1+count<=7&&getPieceByImageView((ImageView) getNodeByRowColumnIndex(i, super.x+1+count, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.DARKBLUE);
 						}
 					}
 		
@@ -127,11 +127,11 @@ public class bishop extends Piece{
 			if(!piece) {
 			
 					if(super.x-1-count>=0&&((ImageView)getNodeByRowColumnIndex(i, super.x-1-count, root)==null) ){
-						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.DARKBLUE);
 					}else {
 						piece=true;
 						if(super.x-1-count>=0&&getPieceByImageView((ImageView) getNodeByRowColumnIndex(i, super.x-1-count, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x-1-count, root)).setFill(Color.DARKBLUE);
 						}
 					}
 		
@@ -145,11 +145,11 @@ public class bishop extends Piece{
 			if(!piece) {
 			
 					if(super.x+1+count<=7&&((ImageView)getNodeByRowColumnIndex(i, super.x+1+count, root)==null) ){
-						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.DARKBLUE);
 					}else {
 						piece=true;
 						if(super.x+1+count<=7&&getPieceByImageView((ImageView) getNodeByRowColumnIndex(i, super.x+1+count, root)).couleur!=this.couleur) {
-						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.BLUE);
+						((Rectangle )getRectByRowColumnIndex(i, super.x+1+count, root)).setFill(Color.DARKBLUE);
 						}
 					}
 		
