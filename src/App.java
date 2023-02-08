@@ -111,8 +111,8 @@ public class App extends Application{
 
                 	labelBlanc.textProperty().addListener((observable, oldValue, newValue) -> {
                 		if(newValue.equals("00:00")) {
-                            Image im = new Image("background/backgroundBlackWin.jpg");
-                            endGameScreen(stage, "le temps ",jBlack,im);
+                           
+                            endGameScreen(stage, "le temps ",jBlack);
                   		}
                 	});
                 	Label labelNoir = new Label();
@@ -121,8 +121,8 @@ public class App extends Application{
 
                 	labelNoir.textProperty().addListener((observable, oldValue, newValue) -> {
               		if(newValue.equals("00:00")) {
-                        Image im = new Image("background/backgroundWhiteWin.jpg");
-                        endGameScreen(stage, "le temps ",jWhite,im);
+                       
+                        endGameScreen(stage, "le temps ",jWhite);
               		}
               	});
                     jBlack = textFieldBlack.getText();
@@ -416,9 +416,8 @@ public class App extends Application{
       	    			timerBlanc.stop();
       	    			timerNoir.stop();
                         String winner = (p.couleur.equals("black"))?jWhite:jBlack;
-                        Image im = (winner.equals(jBlack)) ? new Image("background/backgroundBlackWin2.jpg") : new Image("background/backgroundWhiteWin2.jpg");
                         
-                        endGameScreen(stage, "roi en echec et mat ",winner,im);
+                        endGameScreen(stage, "roi en echec et mat ",winner);
       	    		}
       	    }
       	    
@@ -427,31 +426,35 @@ public class App extends Application{
 	  }
 		
 	}
-  public void endGameScreen(Stage stage, String mess, String winner, Image im){
-        System.out.println("partie finis");
+  public void endGameScreen(Stage stage, String mess, String winner){
+        System.out.println("partie finisss");
         Label blackWinLabel = new Label("Victoire de "+winner+" avec "+mess);
         //change interface 
         VBox vButton = new VBox();
         Button restart = new Button("Restart");
         restart.setOnAction(e -> {
-            Label labelBlanc = new Label();
+                    timerBlanc.setDuration(Duration.minutes(1));
+                    timerNoir.setDuration(Duration.minutes(1));
+                    trait = "white";
+                    root.getChildren().clear();
+                    lesPieces.clear();
+
+                    Label labelNoir = new Label();
+                	labelNoir.setFont(Font.font("Arial", 20));
+                	labelNoir.textProperty().bind(timeLeftAsString(timerNoir));
+                    Label labelBlanc = new Label();
                 	labelBlanc.setFont(Font.font("Arial", 20));
                 	labelBlanc.textProperty().bind(timeLeftAsString(timerBlanc));
 
                 	labelBlanc.textProperty().addListener((observable, oldValue, newValue) -> {
                 		if(newValue.equals("00:00")) {
-                            Image ima = new Image("background/backgroundBlackWin.jpg");
-                            endGameScreen(stage, "le temps ",jBlack,ima);
+                            
+                            endGameScreen(stage, "le temps ",jBlack);
                   		}
                 	});
-                	Label labelNoir = new Label();
-                	labelNoir.setFont(Font.font("Arial", 20));
-                	labelNoir.textProperty().bind(timeLeftAsString(timerNoir));
-
                 	labelNoir.textProperty().addListener((observable, oldValue, newValue) -> {
               		if(newValue.equals("00:00")) {
-                        Image ima = new Image("background/backgroundWhiteWin.png");
-                        endGameScreen(stage, "le temps ",jWhite,ima);
+                        endGameScreen(stage, "le temps ",jWhite);
               		}
               	});
                     
@@ -462,17 +465,25 @@ public class App extends Application{
                     VBox v1 = new VBox();
                     v1.setPadding(new Insets(40,270,40,40));
                     v1.setBorder(new Border(new BorderStroke(Color.BLACK, 
-                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-                    v1.getChildren().addAll(nomJBlack,labelNoir,nomJWhiteV,labelBlanc);
-                    HBox mainContainer = new HBox(root,v1);
-                    Scene scene = new Scene(mainContainer,700,400);
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.EMPTY)));
+                    v1.getChildren().addAll(nomJBlack,labelNoir);
+                    
+                    VBox v2 = new VBox();
+                    v2.setPadding(new Insets(215,0,40,40));
+                    v2.setBorder(new Border(new BorderStroke(Color.BLACK, 
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.EMPTY)));
+                    v2.getChildren().addAll(nomJWhiteV,labelBlanc);
+                    
+                    VBox timer = new VBox(v1,v2);
+                    
+                    HBox mainContainer = new HBox(root,timer);
+                    
+                    Scene scene = new Scene(mainContainer,600,400);
                     
                 	  
                       Color lightGray = Color.LIGHTGRAY;
                       Color darkGray = Color.DARKGRAY;
-                      trait = "white";
-                      root.getChildren().clear();
-                      lesPieces.clear();
+                      
 
                       for (int row = 0; row < 8; row++) {
                           for (int col = 0; col < 8; col++) {
