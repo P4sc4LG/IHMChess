@@ -1,6 +1,14 @@
-/App$3.class
 /App$1.class
 /App$2.class
-/App.class
 /App$3.class
+/App.class
 /Piece.class
+/background/
+/bishop.class
+/king.class
+/knight.class
+/pieces/
+/pion.class
+/queen.class
+/rook.class
+/style.css

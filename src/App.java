@@ -154,6 +154,10 @@ public class App extends Application{
                               	    public void handle(MouseEvent t) {
                               	    	Rectangle r = (Rectangle)t.getTarget();
                               	    		if(r.getFill().equals(Color.BLUE)) {
+                              	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
+                             	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
+                             	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
+                             	    			}
                               	    			root.getChildren().remove(selectedPiece.getV());
                               	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
                               	    			
@@ -190,6 +194,10 @@ public class App extends Application{
                                  	    public void handle(MouseEvent t) {
                                  	    	Rectangle r = (Rectangle)t.getTarget();
                                  	    		if(r.getFill().equals(Color.BLUE)) {
+                                 	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
+                                 	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
+                                 	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
+                                 	    			}
                                  	    			root.getChildren().remove(selectedPiece.getV());
                                  	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
                                  	    			if(selectedPiece instanceof pion) { 
