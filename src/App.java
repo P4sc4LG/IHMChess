@@ -46,8 +46,8 @@ public class App extends Application{
     GridPane root = new GridPane();
     static List<Piece> lesPieces = new ArrayList();
     public String trait = "white";
-    PauseTransition timerBlanc = new PauseTransition(Duration.minutes(10));
-    PauseTransition timerNoir = new PauseTransition(Duration.minutes(10));
+    PauseTransition timerBlanc = new PauseTransition(Duration.minutes(1));
+    PauseTransition timerNoir = new PauseTransition(Duration.minutes(1));
   
     
   
@@ -109,9 +109,19 @@ public class App extends Application{
                 	Label labelBlanc = new Label();
                 	labelBlanc.setFont(Font.font("Arial", 20));
                 	labelBlanc.textProperty().bind(timeLeftAsString(timerBlanc));
+                	labelBlanc.textProperty().addListener((observable, oldValue, newValue) -> {
+                		if(newValue.equals("00:00")) {
+                  			System.out.println("partie finis");
+                  		}
+                	});
                 	Label labelNoir = new Label();
                 	labelNoir.setFont(Font.font("Arial", 20));
                 	labelNoir.textProperty().bind(timeLeftAsString(timerNoir));
+                	labelNoir.textProperty().addListener((observable, oldValue, newValue) -> {
+              		if(newValue.equals("00:00")) {
+              			System.out.println("partie finis");
+              		}
+              	});
                     jBlack = textFieldBlack.getText();
                     jWhite = textFieldWhite.getText();
                     Text nomJBlack = new Text("Joueur Noir : "+jBlack);
@@ -373,7 +383,16 @@ public class App extends Application{
       	    		}
       	    		 System.out.println("trait : " +trait);
       	    		selectedPiece=null;
-      	    		resetColor();}
+      	    		resetColor();
+      	    	
+      	    		
+      	    		}
+      	    		if(p instanceof king) {
+      	    			System.out.println("partie finis le joueur "+p.couleur+ "à perdu");
+      	    			timerBlanc.stop();
+      	    			timerNoir.stop();
+      	    			
+      	    		}
       	    }
       	    
       	    }
@@ -445,7 +464,7 @@ public class App extends Application{
               long remainingTime = Math.round(totalTime - currentTime);
               java.time.Duration dur = java.time.Duration.ofMillis(remainingTime);
               return String.format(
-                  "%02d:%02d:%03d", dur.toMinutes(), dur.toSecondsPart(), dur.toMillisPart());
+                  "%02d:%02d", dur.toMinutes(), dur.toSecondsPart());
             },
             animation.currentTimeProperty(),
             animation.cycleDurationProperty());
