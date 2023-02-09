@@ -193,7 +193,6 @@ public class App extends Application{
                                   	    		}
                               	    			selectedPiece=null;
                               	    			resetColor();
-                              	    		  System.out.println("trait : " +trait);
                               	    		}
                               	    	
                               	        }});
@@ -232,7 +231,6 @@ public class App extends Application{
                                       	    		}
                                   	    			selectedPiece=null;
                                   	    			resetColor();
-                                  	    		  System.out.println("trait : " +trait);
                                  	    		}
                                  	        }});
                               }
@@ -397,12 +395,10 @@ public class App extends Application{
       	    			timerBlanc.pause();
       	    			trait="black";
       	    		}
-      	    		 System.out.println("trait : " +trait);
       	    		selectedPiece=null;
       	    		resetColor();
       	    		}
       	    		if(p instanceof king) {
-      	    			System.out.println("partie finis le joueur "+p.couleur+ "à perdu");
       	    			timerBlanc.stop();
       	    			timerNoir.stop();
                         String winner = (p.couleur.equals("black"))?jWhite:jBlack;
@@ -417,7 +413,6 @@ public class App extends Application{
 		
 	}
   public void endGameScreen(Stage stage, String mess, String winner){
-        System.out.println("partie finisss");
         Label blackWinLabel = new Label("Victoire de "+winner+" avec "+mess);
         //change interface 
         VBox vButton = new VBox();
@@ -468,8 +463,6 @@ public class App extends Application{
                     HBox mainContainer = new HBox(root,timer);
                     
                     Scene scene = new Scene(mainContainer,600,400); 	  
-                    Color lightGray = Color.LIGHTGRAY;
-                    Color darkGray = Color.DARKGRAY;
                 
                       for (int row = 0; row < 8; row++) {
                           for (int col = 0; col < 8; col++) {
