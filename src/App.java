@@ -241,14 +241,6 @@ public class App extends Application{
                    ;
                    	genPiece(stage);
 
-
-                  
-                      
-                   
-                   
-                      
-                     
-                      
                       timerBlanc.play();
                       
                       stage.setScene(scene);
@@ -408,8 +400,6 @@ public class App extends Application{
       	    		 System.out.println("trait : " +trait);
       	    		selectedPiece=null;
       	    		resetColor();
-      	    	
-      	    		
       	    		}
       	    		if(p instanceof king) {
       	    			System.out.println("partie finis le joueur "+p.couleur+ "à perdu");
@@ -433,12 +423,12 @@ public class App extends Application{
         VBox vButton = new VBox();
         Button restart = new Button("Restart");
         restart.setOnAction(e -> {
-                    timerBlanc.setDuration(Duration.minutes(1));
-                    timerNoir.setDuration(Duration.minutes(1));
+                    timerBlanc = new PauseTransition(Duration.minutes(1));
+                    timerNoir = new PauseTransition(Duration.minutes(1));
                     trait = "white";
-                    root.getChildren().clear();
                     lesPieces.clear();
-
+                    selectedPiece = null;
+                    
                     Label labelNoir = new Label();
                 	labelNoir.setFont(Font.font("Arial", 20));
                 	labelNoir.textProperty().bind(timeLeftAsString(timerNoir));
@@ -448,15 +438,14 @@ public class App extends Application{
 
                 	labelBlanc.textProperty().addListener((observable, oldValue, newValue) -> {
                 		if(newValue.equals("00:00")) {
-                            
                             endGameScreen(stage, "le temps ",jBlack);
                   		}
                 	});
                 	labelNoir.textProperty().addListener((observable, oldValue, newValue) -> {
-              		if(newValue.equals("00:00")) {
-                        endGameScreen(stage, "le temps ",jWhite);
-              		}
-              	});
+                        if(newValue.equals("00:00")) {
+                            endGameScreen(stage, "le temps ",jWhite);
+                        }
+              	    });
                     
                     Text nomJBlack = new Text("Joueur Noir : "+jBlack);
                     Text nomJWhiteV = new Text("Joueur Blanc : "+jWhite);
@@ -478,112 +467,25 @@ public class App extends Application{
                     
                     HBox mainContainer = new HBox(root,timer);
                     
-                    Scene scene = new Scene(mainContainer,600,400);
-                    
-                	  
-                      Color lightGray = Color.LIGHTGRAY;
-                      Color darkGray = Color.DARKGRAY;
-                      
-
+                    Scene scene = new Scene(mainContainer,600,400); 	  
+                    Color lightGray = Color.LIGHTGRAY;
+                    Color darkGray = Color.DARKGRAY;
+                
                       for (int row = 0; row < 8; row++) {
                           for (int col = 0; col < 8; col++) {
-                              if ((row + col) % 2 == 0) {
-                              	Rectangle r = new Rectangle(50, 50, lightGray);
-                                  GridPane.setRowIndex(r, row);
-                                  GridPane.setColumnIndex(r, col);
-                                  root.getChildren().add(r);
-                                  r.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                              	    @Override
-                              	    public void handle(MouseEvent t) {
-                              	    	Rectangle r = (Rectangle)t.getTarget();
-                              	    		if(r.getFill().equals(Color.DARKBLUE)) {
-                              	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
-                             	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
-                             	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
-                             	    			}
-                              	    			root.getChildren().remove(selectedPiece.getV());
-                              	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
-                              	    			
-                              	    			selectedPiece.x=GridPane.getColumnIndex(r);
-                              	    			selectedPiece.y=GridPane.getRowIndex(r);
-                              	    			if(selectedPiece instanceof pion) { 
-                                  	    			pion pp = (pion)selectedPiece;
-                                  	    			pp.firstMove=false;
-                                  	    			}
-                              	    			if(selectedPiece.couleur.equals("black")) {
-                                  	    			trait="white";
-                                  	    			timerBlanc.play();
-                                  	    			timerNoir.pause();
-                                  	    		}
-                                  	    		else {
-                                  	    			trait="black";
-                                  	    			timerNoir.play();
-                                  	    			timerBlanc.pause();
-                                  	    		}
-                              	    			selectedPiece=null;
-                              	    			resetColor();
-                              	    		  System.out.println("trait : " +trait);
-                              	    		}
-                              	    	
-                              	        }});
-          
-                              } else {
-                              	 Rectangle r = new Rectangle(50, 50, darkGray);
-                                   GridPane.setRowIndex(r, row);
-                                   GridPane.setColumnIndex(r, col);
-                                   root.getChildren().add(r);
-                                   r.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                                 	    @Override
-                                 	    public void handle(MouseEvent t) {
-                                 	    	Rectangle r = (Rectangle)t.getTarget();
-                                 	    		if(r.getFill().equals(Color.DARKBLUE)) {
-                                 	    			if(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root))!=null) {
-                                 	    				lesPieces.remove(getPieceByImageView( (ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root)));
-                                 	    				root.getChildren().remove((ImageView) getNodeByRowColumnIndex(GridPane.getRowIndex(r), GridPane.getColumnIndex(r), root));
-                                 	    			}
-                                 	    			root.getChildren().remove(selectedPiece.getV());
-                                 	    			root.add(selectedPiece.getV(), GridPane.getColumnIndex(r), GridPane.getRowIndex(r));
-                                 	    			if(selectedPiece instanceof pion) { 
-                                      	    			pion pp = (pion)selectedPiece;
-                                      	    			pp.firstMove=false;
-                                      	    			}
-                                 	    			selectedPiece.x=GridPane.getColumnIndex(r);
-                                  	    			selectedPiece.y=GridPane.getRowIndex(r);
-                                  	    			if(selectedPiece.couleur.equals("black")) {
-                                      	    			trait="white";
-                                      	    			timerBlanc.play();
-                                      	    			timerNoir.pause();
-                                      	    		}
-                                      	    		else {
-                                      	    			trait="black";
-                                      	    			timerNoir.play();
-                                      	    			timerBlanc.pause();
-                                      	    		}
-                                  	    			selectedPiece=null;
-                                  	    			resetColor();
-                                  	    		  System.out.println("trait : " +trait);
-                                 	    		}
-                                 	        }});
+                              if(getNodeByRowColumnIndex(row, col, root) != null){
+                                    root.getChildren().remove(getNodeByRowColumnIndex(row, col, root));
                               }
                           }
                       }
-                   ;
+                    
+                    resetColor();
                    	genPiece(stage);
 
-
-                  
-                      
-                   
-                   
-                      
-                     
-                      
-                      timerBlanc.play();
-                      
-                      stage.setScene(scene);
-                      stage.setTitle("JavaFX Chess Board");
-                      stage.show();
+                    timerBlanc.play(); 
+                    stage.setScene(scene);
+                    stage.setTitle("JavaFX Chess Board");
+                    stage.show();
         });
 
         restart.setId("button-style");
